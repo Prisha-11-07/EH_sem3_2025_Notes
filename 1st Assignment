@@ -1,0 +1,88 @@
+----Mini Port Scanner----
+
+## 1. Introduction
+
+A **port scanner** is a network tool used to identify open ports on a target host. 
+This project demonstrates a simple **mini port scanner** developed in Python using the `socket` library. 
+The tool is designed for **educational purposes** to understand basic network scanning concepts.
+
+## 2. Objective
+
+- To develop a basic Python program to scan open TCP ports on a target system.  
+- To gain hands-on experience with socket programming.  
+- To understand the fundamentals of network reconnaissance.
+
+## 3. Technologies Used
+
+- **Programming Language**: Python 3  
+- **Library**: `socket` (standard library)  
+- **Operating System**: Cross-platform (Windows/Linux)
+
+## 4. System Requirements
+
+- Python 3.x installed  
+- Terminal/Command Prompt access  
+- Basic understanding of IP addresses and ports
+
+## 5. Algorithm / Working
+
+1. Input the target host (IP or domain).  
+2. Input starting and ending port range.  
+3. Use `socket` to attempt a connection on each port.  
+4. If the connection succeeds, the port is **open**.  
+5. Display results and close the connection.
+
+## 6. Code Implementation
+
+```python
+import socket
+
+# Input target and port range
+target = input("Enter target host: ")
+start_port = int(input("Enter start port: "))
+end_port = int(input("Enter end port: "))
+
+print(f"\nScanning {target} from port {start_port} to {end_port}\n")
+
+# Iterate through ports
+for port in range(start_port, end_port + 1):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(0.5)
+    result = s.connect_ex((target, port))
+    if result == 0:
+        print(f"Port {port} is OPEN")
+    s.close()
+
+print("\nScan complete.")
+
+## 7. Example Execution
+**Input:**
+Enter target host: 127.0.0.1
+Enter start port: 20
+Enter end port: 80
+**Output:**
+Scanning 127.0.0.1 from port 20 to 80
+Port 22 is OPEN
+Port 80 is OPEN
+Scan complete.
+
+## 8. Results
+
+- Successfully scanned a given host.  
+- Identified open ports accurately within the specified range.  
+- Demonstrated fundamental network scanning capabilities.
+
+## 9. Conclusion
+
+The mini port scanner helps in understanding how **TCP port scanning** works using socket programming. 
+It is a foundation for building advanced tools like multi-threaded scanners or security auditing tools.
+
+## 10. Future Enhancements
+
+- Add **multi-threading** to improve speed.  
+- Implement **UDP scanning** support.  
+- Provide **graphical user interface (GUI)**.  
+- Save scan reports to file.
+
+
+
